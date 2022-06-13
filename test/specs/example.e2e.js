@@ -35,5 +35,30 @@ describe('My first test suite', () => {
         //Modern way of doing it
         await expect(browser).toHaveTitleContaining("Example Domain");
         await expect(browser).toHaveUrlContaining("example.com");
+
+        let pageElement = await $('h1');
+        await expect(pageElement).toBeExisting();
+        await expect (pageElement).toBeDisplayed();
+        await expect (pageElement).toHaveTextContaining("Example");
     });
+
+    it.only('Forms and inputs', async () => {
+        await browser.url("https://www.saucedemo.com/");
+        await browser.pause(2000);
+
+        let username = await $('#user-name');
+        await username.setValue("standard_user");
+        await browser.pause(2000);
+
+        let password = await $('#password');
+        await password.setValue("secret_sauce");
+        await browser.pause(2000);
+
+        let loginButton = await $('#login-button');
+        await loginButton.click();
+        await browser.pause(2000);
+
+        let inventoryContainer = await $('#inventory_container');
+        await expect(inventoryContainer).toBeExisting();
+    })
 });
