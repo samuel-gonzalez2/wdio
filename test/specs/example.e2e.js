@@ -72,7 +72,7 @@ describe('My first test suite', () => {
         await expect(option).toBeSelected();
     })
 
-    it.only('Set browser size', async () => {
+    it('Set browser size', async () => {
         await browser.setWindowSize(400, 600);
         await browser.url('https://example.com');
         // await browser.pause(5000);
@@ -80,5 +80,23 @@ describe('My first test suite', () => {
         let selector = await $('h1');
         await selector.waitForExist();
         await selector.waitForDisplayed();
+    })
+
+    it.only('Device emulation', async () => {
+        let mobile = [375, 812];
+        let tablet = [768, 1024];
+        let desktop = [1280, 1024];
+
+        //Mobile version
+        await browser.setWindowSize(mobile[0], mobile[1]);
+        await browser.url('https://example.com');
+
+        //Tablet version
+        await browser.setWindowSize(tablet[0], tablet[1]);
+        await browser.url('https://example.com');
+
+        //Desktop version
+        await browser.setWindowSize(desktop[0], desktop[1]);
+        await browser.url('https://example.com');
     })
 });
