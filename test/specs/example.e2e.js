@@ -42,7 +42,7 @@ describe('My first test suite', () => {
         await expect (pageElement).toHaveTextContaining("Example");
     });
 
-    it.only('Forms and inputs', async () => {
+    it('Forms and inputs', async () => {
         await browser.url("https://www.saucedemo.com/");
         await browser.pause(2000);
 
@@ -60,5 +60,25 @@ describe('My first test suite', () => {
 
         let inventoryContainer = await $('#inventory_container');
         await expect(inventoryContainer).toBeExisting();
+    })
+
+    it('Checkboxes, radio buttons', async () => {
+        await browser.url("https://devexpress.github.io/testcafe/example/");
+
+        let selectBox = await $('#preferred-interface');
+        await selectBox.selectByVisibleText("Command Line");
+
+        let option = await $('option=Command Line');
+        await expect(option).toBeSelected();
+    })
+
+    it.only('Set browser size', async () => {
+        await browser.setWindowSize(400, 600);
+        await browser.url('https://example.com');
+        // await browser.pause(5000);
+
+        let selector = await $('h1');
+        await selector.waitForExist();
+        await selector.waitForDisplayed();
     })
 });
