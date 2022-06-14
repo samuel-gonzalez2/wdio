@@ -12,7 +12,7 @@
     });
 }); */
 
-describe('My first test suite', () => {
+describe.skip('My first test suite', () => {
     it('my first wdio test', async () => {
         //TODO
         let myUrl = "https://www.example.com";
