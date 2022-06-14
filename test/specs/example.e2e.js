@@ -82,7 +82,7 @@ describe('My first test suite', () => {
         await selector.waitForDisplayed();
     })
 
-    it.only('Device emulation', async () => {
+    it('Device emulation', async () => {
         let mobile = [375, 812];
         let tablet = [768, 1024];
         let desktop = [1280, 1024];
@@ -98,5 +98,14 @@ describe('My first test suite', () => {
         //Desktop version
         await browser.setWindowSize(desktop[0], desktop[1]);
         await browser.url('https://example.com');
+    })
+
+    it.only('Screenshots', async () => {
+        await browser.url('https://example.com');
+        await browser.saveScreenshot('example.png');
+        await browser.pause(2000);
+
+        let title = await $('h1');
+        await title.saveScreenshot('example2.png');
     })
 });
