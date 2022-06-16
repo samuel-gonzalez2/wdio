@@ -36,13 +36,19 @@ describe('Advanced testing', async () => {
         await browser.pause(3000);
     })
 
-    it.only('Display Title and URL', async () => {
+    it('Display Title and URL', async () => {
         const results = browser.getTitleAndUrl()
         console.log('TITLE: ' + results.title)
         console.log('URL: ' + results.url)
 
         browser.waitAndClick('#file-submit');
         browser.pause(5000);
+    })
+
+    it.only('Change Session ID', async () => {
+        console.log('SESSION BEFORE RELOAD' + browser.sessionId)
+        await browser.reloadSession()
+        console.log('SESSION AFTER RELOAD' + browser.sessionId)
     })
     
 })
