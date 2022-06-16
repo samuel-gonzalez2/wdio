@@ -195,8 +195,25 @@ exports.config = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {Object}         browser      instance of created browser/device session
      */
-    // before: function (capabilities, specs) {
-    // },
+    before: function (capabilities, specs) {
+        browser.addCommand('customFileUpload', async (filePath, uploadBoxSelector, submitUploadSelector) => {
+            const remoteFilePath = await browser.uploadFile(filePath);
+
+            await $(uploadBoxSelector).setValue(remoteFilePath);
+            await $(submitUploadSelector).click();
+        });
+
+        browser.addCommand('getTitleAndUrl', async () => {
+            return {
+                title: await browser.getTitle(),
+                url: await browser.getUrl()
+            };
+        })
+
+        browser.addCommand('waitAndClick', async (selector) => {
+            await browser.waitForDisplayed(selector);
+            await $(selector).click();
+        })
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name
@@ -290,4 +307,5 @@ exports.config = {
     */
     // onReload: function(oldSessionId, newSessionId) {
     // }
+}
 }
