@@ -17,4 +17,16 @@ describe('Login Flow', () => {
         await expect(errorMessage).toHaveTextContaining('Login and/or password are wrong');
 
     })
+
+    it('Reset account password', async () => {
+        const email = 'test@test.com';
+
+        await $('*=Forgot').click();
+        await (await $('#user_email')).setValue(email);
+        await (await $('input[type="submit"]')).click();
+
+        const message = await $('.span6')
+        await expect(message).toHaveTextContaining(`email: ${email}`);
+
+    })
 })
