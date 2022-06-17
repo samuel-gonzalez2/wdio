@@ -51,7 +51,7 @@ describe('Advanced testing', async () => {
         console.log('SESSION AFTER RELOAD' + browser.sessionId)
     })
 
-    it.only('Create and switch new window', async () => {
+    it('Create and switch new window', async () => {
         await browser.url('https://www.google.com')
         await browser.pause(2000)
 
@@ -60,6 +60,21 @@ describe('Advanced testing', async () => {
 
         await browser.switchWindow('https://www.google.com')
     } )
+
+    it.only('Network throttle', async () => {
+        await browser.throttle('Regular3G')
+        await browser.url('https://www.bbva.com')
+        await browser.pause(2000)
+
+        await browser.throttle('Regular4G')
+        await browser.url('https://www.bbva.com')
+        await browser.pause(2000)
+
+        await browser.throttle('offline')
+        await browser.url('https://www.bbva.com')
+        await browser.pause(2000)
+        
+    })
     
 })
 
