@@ -45,11 +45,21 @@ describe('Advanced testing', async () => {
         browser.pause(5000);
     })
 
-    it.only('Change Session ID', async () => {
+    it('Change Session ID', async () => {
         console.log('SESSION BEFORE RELOAD' + browser.sessionId)
         await browser.reloadSession()
         console.log('SESSION AFTER RELOAD' + browser.sessionId)
     })
+
+    it.only('Create and switch new window', async () => {
+        await browser.url('https://www.google.com')
+        await browser.pause(2000)
+
+        await browser.newWindow('https://www.bbva.com')
+        await browser.pause(2000)
+
+        await browser.switchWindow('https://www.google.com')
+    } )
     
 })
 
