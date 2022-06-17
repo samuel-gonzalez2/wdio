@@ -76,9 +76,19 @@ describe('Advanced testing', async () => {
         
     })
     
-    it.only('Execute JS code inside the browser', async() => {
+    it('Execute JS code inside the browser', async() => {
         const result = await browser.execute((a, b) =>{
             return a + b
+        }, 1, 2)
+
+        await expect(result).toBe(3)
+    })
+
+    it.only('Execute async JS code inside the browser', async() => {
+        const result = await browser.executeAsync((a, b, done) =>{
+            setTimeout(() => {
+                done (a + b)
+            }, 3000);
         }, 1, 2)
 
         await expect(result).toBe(3)
