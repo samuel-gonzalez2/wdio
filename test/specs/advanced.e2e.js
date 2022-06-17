@@ -61,7 +61,7 @@ describe('Advanced testing', async () => {
         await browser.switchWindow('https://www.google.com')
     } )
 
-    it.only('Network throttle', async () => {
+    it('Network throttle', async () => {
         await browser.throttle('Regular3G')
         await browser.url('https://www.bbva.com')
         await browser.pause(2000)
@@ -76,6 +76,13 @@ describe('Advanced testing', async () => {
         
     })
     
+    it.only('Execute JS code inside the browser', async() => {
+        const result = await browser.execute((a, b) =>{
+            return a + b
+        }, 1, 2)
+
+        await expect(result).toBe(3)
+    })
 })
 
 async function openUrl(url) {
